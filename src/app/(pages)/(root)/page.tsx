@@ -1,22 +1,18 @@
-import Layout from "../Layout";
+import AppliesTypes from "@/services/PostServices";
+import PostListType from "@/types/PostListType";
+import HomeClient from "./HomeClient";
 
-export default function Home() {
-    return (
-        <Layout>
-            <div className='pt-6 mx-auto lg:max-w-screen-lg'>
-                <div className='flex gap-10 items-start'>
-                    <div className='grid grid-cols-2 gap-4'>
-                        {/* {postList.map((post) => {
-                            return (
-                                <PostBox post={post} />
-                                
-                            )
-                            })}   
-                        </div>
-                        <AboutBox></AboutBox> */}
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    )
+
+
+export default async function Home() {
+
+    const staticPostList: PostListType[] = await AppliesTypes.getList();
+    return <HomeClient staticPostList={staticPostList} />
 }
+
+
+export const revalidate = 10
+
+export async function generateStaticParams() {
+    return [{}]
+  }
