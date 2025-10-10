@@ -1,5 +1,5 @@
 import FeaturedImageType from "./FeaturedImageType"
-import CategoryType from "./Categorytype"
+import CategoryType from "./CategoryType"
 
 
 interface PostListType {

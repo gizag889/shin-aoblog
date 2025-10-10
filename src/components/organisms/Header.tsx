@@ -16,7 +16,7 @@ const Header = () => {
                     <div className="mx-auto w-full  sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-headerlg">
                         <div className="flex justify-between items-center">
                             <h1>
-                                {/* <img src="/aoblogtitle.svg" alt="ブログタイトル"/> */}
+                                <img src="/aoblogtitle.svg" alt="ブログタイトル"/>
                             </h1>
                           
                                 <nav>
