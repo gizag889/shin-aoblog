@@ -7,11 +7,22 @@ import PostListType from "../../types/PostListType";
 import AppliesTypes from "@/services/PostServices";
 
 
-const usePostListSwr = (staticPostList: PostListType[] ) => {
+const usePostListSwr = ({ categoryId, categoryList }: {
+    categoryId?: number,
+    categoryList: PostListType[]
+}) => {
+    let key, fetcher
+    if(categoryId) {
+        key = [WpQueries.listByCategory, categoryId]
+        fetcher = ([_, categoryId]: [string, number]) => AppliesTypes.getList({ categoryId })
+    } else {
+        key = WpQueries.list
+        fetcher = AppliesTypes.getList
+    }
     const { data: postList } = useSWR(
-        WpQueries.list,
-        AppliesTypes.getList,
-        { fallbackData: staticPostList }
+        key,
+        fetcher,
+        { fallbackData:categoryList }
     )
 
     return postList;

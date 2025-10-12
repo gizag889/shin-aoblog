@@ -5,13 +5,21 @@ import PostType from "@/types/PostType";
 
 //postservice
 class AppliesTypes {
-    static async getList(): Promise<PostListType[]> {
+    static async getList({ categoryId }: { categoryId?: number } = {}): Promise<PostListType[]> {
         try {
-
-            const res = await RepositoryFactory.post.getList();
-
-            return res.data.data.posts.edges.map((data: any) => {
-
+            const res = await RepositoryFactory.post.getList({ categoryId });
+            
+            // より安全なチェック
+            if (!res || !res.data || !res.data.data || !res.data.data.posts || !res.data.data.posts.edges) {
+                return [];
+            }
+            
+            const edges = res.data.data.posts.edges;
+            if (!Array.isArray(edges)) {
+                return [];
+            }
+    
+            return edges.map((data: any) => {
                 const post: PostListType = {
                     id: data.node.id,
                     title: data.node.title,
@@ -25,13 +33,11 @@ class AppliesTypes {
                         slug: data.node.categories.edges[0].node.slug,
                         name: data.node.categories.edges[0].node.name
                     }
-                    
                 }
-
-                return post
-            })
-        } catch  {
-            return []
+                return post;
+            });
+        } catch {
+            return [];
         }
     }
 
@@ -76,6 +82,31 @@ class AppliesTypes {
             return []
         }
     }
+
+    // 全カテゴリーのスラッグを取得（getAllSlugListに微妙にまとめにくので別メソッドを分ける）
+    static async getAllCategorySlugList(): Promise<{
+        params: {
+            slug: string
+        }
+    }[]> {
+        try {
+            const res = await RepositoryFactory.post.getAllCategorySlugList()
+            return res.data.data.categories.edges.map((data: any) => {
+                return { params: { slug: data.node.slug } }
+            })
+        } catch {
+            return []
+        }
+    }
+
+     // スラッグからカテゴリーIDを取得する
+     static async getCategoryIdBySlug({ slug }: {
+        slug: string
+    }): Promise<number> {
+        const res = await RepositoryFactory.post.getCategoryIdBySlug({ slug })
+        return res.data.data.category.categoryId
+    }
+   
 
 
 }

@@ -12,10 +12,9 @@ export default function HomeClient({
     staticPostList: PostListType[]
 
 }) {
-    const postList = usePostListSwr(
-        staticPostList
-     
-    )
+    const postList = usePostListSwr({
+        categoryList: staticPostList
+    })
 
 
 
@@ -36,4 +35,3 @@ export default function HomeClient({
         </Layout>
     )
 }
-

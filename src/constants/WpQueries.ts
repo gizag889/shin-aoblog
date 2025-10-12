@@ -1,56 +1,73 @@
 export class WpQueries { // 今後増える可能性を考えてこの命名に
-    static list = `query PostListQuery {
-        posts {
-          edges {
-            node {
-              categories {
-                edges {
-                  node {
-                    name
-                    slug
-                  }
-                }
-              }
-              date
-              excerpt
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
-              id
-              slug
-              title
-            }
-          }
-        }
-      }`
-
-       // slugから記事単体を持ってくる
-    static one = `query PostQuery($id: ID!) {
-      post(id: $id, idType: SLUG) {
-        categories {
-          edges {
-            node {
-              name
-              slug
-            }
-          }
-        }
-        date
-        content
-        featuredImage {
+    // 同じこと2回書かないために共通部分をまとめる
+    private static _itemsOnList = `
+      categories {
+        edges {
           node {
-            sourceUrl
+            name
+            slug
           }
         }
-        id
-        slug
-        title
+      }
+      date
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      id
+      slug
+      title`
+    
+    // 同じくこちらもまとめておく
+    private static _itemsOnOne = `
+      categories {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      date
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      id
+      slug
+      title`
+
+    static list = `query PostListQuery {
+      posts {
+        edges {
+          node {
+            ${this._itemsOnList}
+          }
+        }
       }
     }`
 
-    // 全記事のslugを持ってくる
+    // 特定のカテゴリーの記事一覧取得
+    static listByCategory = `query PostListByCategoryQuery($categoryId: Int!) {
+      posts(where: {categoryId: $categoryId}) {
+        edges {
+          node {
+            ${this._itemsOnList}
+          }
+        }
+      }
+    }`
+
+    static one = `query PostQuery($id: ID!) {
+      post(id: $id, idType: SLUG) {
+        ${this._itemsOnOne}
+      }
+    }`
+
     static allSlugList = `query PostAllSlugListQuery {
       posts(first: 10000) {
         edges {
@@ -58,6 +75,24 @@ export class WpQueries { // 今後増える可能性を考えてこの命名に
             slug
           }
         }
+      }
+    }`
+
+    // 全カテゴリーのスラッグを取得
+    static allCategorySlugList = `query PostAllCategorySlugListQuery {
+      categories {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }`
+
+    // スラッグからカテゴリーIDを取得する
+    static categoryIdBySlug = `query PostCategoryIdBySlugQuery($id: ID!) {
+      category(id: $id, idType: SLUG) {
+        categoryId
       }
     }`
 }
