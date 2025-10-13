@@ -2,24 +2,22 @@ import RepositoryFactory from "../repostitories/RepositoryFactory";
 //types
 import PostListType from "@/types/PostListType";
 import PostType from "@/types/PostType";
+import OffsetPaginationType from "@/types/OffsetPaginationType";
+
+import PostConst from "@/constants/PostConst";
+import { WpQueries } from "@/constants/WpQueries";
 
 //postservice
 class AppliesTypes {
-    static async getList({ categoryId }: { categoryId?: number } = {}): Promise<PostListType[]> {
+    static async getList({ categoryId, page }: { 
+        categoryId?: number, page: number } ): Promise<[PostListType[], number]> {
         try {
-            const res = await RepositoryFactory.post.getList({ categoryId });
+            const offsetPagination = this._makeOffsetPaginationFromPage(page)
+
+            const res = await RepositoryFactory.post.getList({ categoryId, offsetPagination });
             
-            // より安全なチェック
-            if (!res || !res.data || !res.data.data || !res.data.data.posts || !res.data.data.posts.edges) {
-                return [];
-            }
-            
-            const edges = res.data.data.posts.edges;
-            if (!Array.isArray(edges)) {
-                return [];
-            }
-    
-            return edges.map((data: any) => {
+            const postList = res.data.data.posts.edges.map((data: any) => {
+
                 const post: PostListType = {
                     id: data.node.id,
                     title: data.node.title,
@@ -34,11 +32,14 @@ class AppliesTypes {
                         name: data.node.categories.edges[0].node.name
                     }
                 }
-                return post;
-            });
+              return post
+            })
+            const total = res.data.data.posts.pageInfo.offsetPagination.total
+            return [postList, total]
         } catch {
-            return [];
+            return [[], 0];
         }
+    
     }
 
     // slugから記事単体を取得
@@ -99,12 +100,34 @@ class AppliesTypes {
         }
     }
 
+    static async getAllPageList(): Promise<{
+        params: {
+            page: string
+        }
+    }[]> {
+        const total = await this.getTotal()
+        const pageTotal = Math.ceil(total / PostConst.sizePerPage)
+        const pageList = [...Array(pageTotal)].map((_, i) => i + 1)
+        return pageList.map((page:number) => {
+            return { params: { page: page.toString() }}
+        })
+    }
+
      // スラッグからカテゴリーIDを取得する
      static async getCategoryIdBySlug({ slug }: {
         slug: string
     }): Promise<number> {
         const res = await RepositoryFactory.post.getCategoryIdBySlug({ slug })
         return res.data.data.category.categoryId
+    }
+
+    static async getTotal(): Promise<number> {
+        const res = await RepositoryFactory.post.getTotal()
+        return res.data.data.posts.pageInfo.offsetPagination.total
+    }
+
+    private static _makeOffsetPaginationFromPage(page: number): OffsetPaginationType {
+        return { offset: (page - 1) * PostConst.sizePerPage, size: PostConst.sizePerPage }
     }
    
 

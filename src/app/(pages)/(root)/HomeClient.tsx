@@ -5,15 +5,23 @@ import PostListType from "@/types/PostListType";
 import Layout from "../../../components/layouts/Layout";
 import PostBox from "@/components/molecules/PostBox";
 import AboutBox from "@/components/molecules/AboutBox";
+import Pagination from "@/components/molecules/Pagination";
+import PostConst from "@/constants/PostConst";
 
 export default function HomeClient({
     staticPostList,
+    staticTotal,
+    currentPage
 }: {
-    staticPostList: PostListType[]
+    staticPostList: PostListType[],
+    staticTotal: number,
+    currentPage: number
 
 }) {
-    const postList = usePostListSwr({
-        categoryList: staticPostList
+    const [postList, total] = usePostListSwr({
+        staticPostList,
+        staticTotal,
+        currentPage
     })
 
 
@@ -31,6 +39,7 @@ export default function HomeClient({
                     </div>
                     <AboutBox></AboutBox>
                 </div>
+                <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path="" />
             </div>
         </Layout>
     )

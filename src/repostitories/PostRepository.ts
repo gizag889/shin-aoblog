@@ -1,19 +1,24 @@
 import { WpQueries } from "@/constants/WpQueries"
 import Repository from "./Repository"
+import OffsetPaginationType from "@/types/OffsetPaginationType"
 
 class PostRepository {
-    static getList({ categoryId }: {
-        categoryId?: number
+    static getList({ categoryId, offsetPagination }: {
+        categoryId?: number,
+        offsetPagination: OffsetPaginationType
     }) {
         // 引数のcategoryIdがあれば特定のカテゴリーに絞る
         if (categoryId) {
             return Repository(
                 WpQueries.listByCategory,
-                { variables: { categoryId } }
+                { variables: { categoryId, offsetPagination } }
             ).getWp()
         }
+
 	// なければ今まで通り全記事取得
-        return Repository(WpQueries.list).getWp()
+        return Repository(WpQueries.list,
+            { variables: { offsetPagination }}
+        ).getWp()
     }
 
     // slugから記事単体を取得
@@ -44,6 +49,10 @@ class PostRepository {
             WpQueries.categoryIdBySlug,
             { variables: { id: slug } }
         ).getWp()
+    }
+
+    static getTotal() {
+        return Repository(WpQueries.total).getWp()
     }
 }
 

@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 
 
 export default async function Home() {
-
-    const staticPostList: PostListType[] = await AppliesTypes.getList();
-    return <HomeClient staticPostList={staticPostList} />
+    const currentPage = 1
+    const [staticPostList, staticTotal]: [PostListType[], number] = await AppliesTypes.getList({ page: currentPage });
+    return <HomeClient staticPostList={staticPostList} staticTotal={staticTotal} currentPage={currentPage} />
 }
 
 
