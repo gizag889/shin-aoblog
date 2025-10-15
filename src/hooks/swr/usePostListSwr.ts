@@ -21,6 +21,7 @@ const usePostListSwr = ({ currentPage, categoryId, staticPostList, staticTotal }
         fetcher = ([_, page]: [string, number]) => AppliesTypes.getList({ page })
     }
     const { data } = useSWR<[PostListType[], number]>(
+        //ここまでで設定してきた、key,fetcher格納
         key,
         fetcher,
         { fallbackData: [staticPostList, staticTotal] }

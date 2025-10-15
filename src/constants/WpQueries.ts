@@ -95,6 +95,17 @@ static allCategorySlugList = `query PostAllCategorySlugListQuery {
   }
 }`
 
+static allCategories = `query PostAllCategoriesQuery {
+  categories(first: 10000) {
+    edges {
+      node {
+        name
+        slug
+      }
+    }
+  }
+}`
+
 static categoryIdBySlug = `query PostCategoryIdBySlugQuery($id: ID!) {
   category(id: $id, idType: SLUG) {
     categoryId

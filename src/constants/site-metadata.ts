@@ -6,6 +6,9 @@ interface SiteMetadata {
       twitter: string;
       github: string;
     };
+    OG_IMAGE: {
+      twitter: string;
+    }
   }
    
   const SITE_URLS = {
@@ -18,12 +21,14 @@ interface SiteMetadata {
    
   export const siteMetadata: SiteMetadata = {
     SITE_URL: siteUrl,
-    SITE_NAME: "My Next Starter",
-    SITE_DESC:
-      "My Next Starterは、Next.jsとshadcn/uiを使用した、最新のWeb開発体験を提供するスターターテンプレートです。",
-    // 下記はダミーのURLです。実際のURLに置き換えてください。
+    SITE_NAME: "青柳のブログ",
+    SITE_DESC:"web制作の備忘録や読書記録を載せてるブログです。",
     SOCIAL_MEDIA: {
-      twitter: "https://x.com/b13ocom",
-      github: "https://github.com/b13o",
+      twitter: "https://x.com/aoblog8890",
+      github: "https://github.com/gizag889",
     },
+    OG_IMAGE: {
+      twitter: "記事のサムネ：markdownで編集できるやつ"
+    }
+    
   };

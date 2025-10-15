@@ -13,11 +13,16 @@ export default function CategoryClient({
     categoryId: number,
     categoryList: PostListType[]
 }) {
-    const category = usePostListSwr({categoryId,  categoryList})
+    const [posts, total] = usePostListSwr({
+        currentPage: 1,
+        categoryId,
+        staticPostList: categoryList,
+        staticTotal: categoryList.length
+    })
     return(
         <Layout>
             <div className='flex flex-wrap w-main mx-auto'>
-                {categoryList!.map((post) => {
+                {posts.map((post) => {
                 return (
                     <div key={post.id} className='w-1/3 pr-4 pb-4 [&:nth-of-type(3n)]:pr-0'>
                     <PostBox post={post} />

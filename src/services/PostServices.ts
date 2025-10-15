@@ -9,6 +9,7 @@ import { WpQueries } from "@/constants/WpQueries";
 
 //postservice
 class AppliesTypes {
+    
     static async getList({ categoryId, page }: { 
         categoryId?: number, page: number } ): Promise<[PostListType[], number]> {
         try {
@@ -40,6 +41,19 @@ class AppliesTypes {
             return [[], 0];
         }
     
+    }
+
+    // すべてのカテゴリ（name/slug）を取得
+    static async getAllCategories(): Promise<{ slug: string, name: string }[]> {
+        try {
+            const res = await RepositoryFactory.post.getAllCategories()
+            return res.data.data.categories.edges.map((edge: any) => ({
+                slug: edge.node.slug,
+                name: edge.node.name
+            }))
+        } catch {
+            return []
+        }
     }
 
     // slugから記事単体を取得

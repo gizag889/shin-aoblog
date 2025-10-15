@@ -41,6 +41,11 @@ class PostRepository {
         return Repository(WpQueries.allCategorySlugList).getWp()
     }
 
+    // すべてのカテゴリ（name/slug）を取得
+    static getAllCategories() {
+        return Repository(WpQueries.allCategories).getWp()
+    }
+
     // スラッグからカテゴリーIDを取得する
     static getCategoryIdBySlug({ slug }: {
         slug: string
