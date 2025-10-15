@@ -25,7 +25,7 @@ export default function CategoryClient({
                 {posts.map((post) => {
                 return (
                     <div key={post.id} className='w-1/3 pr-4 pb-4 [&:nth-of-type(3n)]:pr-0'>
-                    <PostBox post={post} />
+                        <PostBox  post={post} />
                     </div>
                 )
                 })}

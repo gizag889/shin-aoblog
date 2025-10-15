@@ -10,7 +10,7 @@ export default async function categoryPage({ params }: { params: { slug: string}
     if (!categoryId) {
         notFound();
     }
-    const staticPost: PostListType[] = await AppliesTypes.getList({ categoryId });
+    const [staticPost] = await AppliesTypes.getList({ categoryId, page: 1 });
     if (!staticPost || staticPost.length === 0) {
         notFound();
     }
