@@ -2,7 +2,7 @@
 import usePostListSwr from "@/hooks/swr/usePostListSwr";
 import PostListType from "@/types/PostListType";
 //component
-import Layout from "../../../components/layouts/Layout";
+import Layout from "@/components/layouts/Layout";
 import PostBox from "@/components/molecules/PostBox";
 import AboutBox from "@/components/molecules/AboutBox";
 import Pagination from "@/components/molecules/Pagination";

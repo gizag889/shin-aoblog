@@ -1,6 +1,6 @@
 import AppliesTypes from "@/services/PostServices";
 import PostListType from "@/types/PostListType";
-import HomeClient from "../HomeClient";
+import HomeClient from "./HomeClient";
 import { notFound } from "next/navigation";
 
 export default async function HomeByPage({ params }: { params: { page: string } }) {
@@ -22,5 +22,4 @@ export async function generateStaticParams() {
     // Service returns [{ params: { page } }], transform to [{ page }]
     return list.map((item) => ({ page: item.params.page }));
 }
-
 

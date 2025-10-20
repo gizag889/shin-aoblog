@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import PostClient from "../PostClient";
 
 
-
 export default async function PostPage({ params }: { params: { slug: string } }) {
 
     const staticPost: PostType | null = await AppliesTypes.getOne({ id: params.slug });

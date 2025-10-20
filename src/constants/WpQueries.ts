@@ -1,4 +1,22 @@
 export class WpQueries { // 今後増える可能性を考えてこの命名に
+
+  static allCategorySlugList = `query PostAllCategorySlugListQuery {
+     categories {
+       edges {
+         node {
+           slug
+           posts {
+             pageInfo {
+               offsetPagination {
+                 total
+               }
+             }
+           }
+         }
+       }
+     }
+  }`
+
   private static _itemsOnList = `
   categories {
     edges {
@@ -38,6 +56,23 @@ private static _itemsOnOne = `
   id
   slug
   title`
+
+  static categoryTotal = `query categoryTotal {
+  categories {
+    edges {
+      node {
+        posts {
+          pageInfo {
+            offsetPagination {
+              total
+            }
+          }
+        }
+      }
+    }
+  }
+}`
+
 
 static list = `query PostListQuery($offsetPagination: OffsetPagination!) {
   posts(where: {offsetPagination: $offsetPagination}) {
@@ -85,15 +120,7 @@ static allSlugList = `query PostAllSlugListQuery {
   }
 }`
 
-static allCategorySlugList = `query PostAllCategorySlugListQuery {
-  categories {
-    edges {
-      node {
-        slug
-      }
-    }
-  }
-}`
+
 
 static allCategories = `query PostAllCategoriesQuery {
   categories(first: 10000) {

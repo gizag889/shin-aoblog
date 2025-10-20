@@ -9,6 +9,36 @@ import { WpQueries } from "@/constants/WpQueries";
 
 //postservice
 class AppliesTypes {
+
+    static async getTotalCategory() {
+        // 2. 結果を格納する配列を初期化
+        const paths: { params: { param: string[] } }[] = [];
+    
+        const res = await RepositoryFactory.post.getAllCategorySlugList();
+    
+        res.data.data.categories.edges.forEach((data: any) => {
+            const categorySlug = data.node.slug;
+            const total = data.node.posts.pageInfo.offsetPagination.total;
+    
+          
+            const pageList = AppliesTypes._makePageList(total); 
+    
+            pageList.forEach((page: number) => {
+                // 2. 'getTotalCategory.push' を 'paths.push' に修正
+                paths.push({
+                    params: { param: ['category', categorySlug, 'page', page.toString()] }
+                });
+            });
+        });
+    
+        // 3. 結果の配列を return
+        return paths;
+    }
+
+    private static _makePageList(total: number) {
+        const pageTotal = Math.ceil(total / PostConst.sizePerPage)
+        return [...Array(pageTotal)].map((_, i) => i + 1)
+    }
     
     static async getList({ categoryId, page }: { 
         categoryId?: number, page: number } ): Promise<[PostListType[], number]> {

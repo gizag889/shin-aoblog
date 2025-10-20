@@ -3,15 +3,18 @@ import usePostListSwr from "@/hooks/swr/usePostListSwr";
 import PostListType from "@/types/PostListType";
 import Layout from "@/components/layouts/Layout";
 import PostBox from "@/components/molecules/PostBox";
-
+import PostConst from "@/constants/PostConst";
+import Pagination from "@/components/molecules/Pagination";
 
 
 export default function CategoryClient({
     categoryId,
     categoryList,
+    currentPage
 }: {
     categoryId: number,
     categoryList: PostListType[]
+    currentPage: number
 }) {
     const [posts, total] = usePostListSwr({
         currentPage: 1,
@@ -30,6 +33,8 @@ export default function CategoryClient({
                 )
                 })}
             </div>
+            <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path="" />
+
         </Layout>
     )
 }
