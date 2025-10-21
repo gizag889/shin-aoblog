@@ -4,19 +4,20 @@ import { notFound } from "next/navigation";
 import CategoryClient from "../../categoryClient";
 
 
-export default async function categoryPage({ params }: { params: { slug: string}}){
+export default async function categoryPage({ params }: { params: { slug: string, page: string}}){
 
-    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug:params.slug });
+    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug: params.slug });
     if (!categoryId) {
         notFound();
     }
-    const [staticPost] = await AppliesTypes.getList({ categoryId, page: 1 });
+    
+    const page = parseInt(params.page);
+    const [staticPost] = await AppliesTypes.getList({ categoryId, page });
     if (!staticPost || staticPost.length === 0) {
         notFound();
     }
 
-    
-
+    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={page} categorySlug={params.slug} />
 }
 
 export const revalidate = 10
@@ -27,10 +28,12 @@ export async function generateStaticParams() {
     // ページネーションも含めた全てのパスを生成
     return paths.map((path) => {
         const param = path.params.param;
-        if (param.length >= 2 && param[0] === 'category') {
-            const categorySlug = param[1];
-            return { slug: categorySlug };
+        if (param.length >= 4 && param[0] === 'category' && param[2] === 'page') {
+            return { 
+                slug: param[1], 
+                page: param[3] 
+            };
         }
-        return { slug: '' };
-    }).filter(item => item.slug !== '');
+        return null;
+    }).filter(item => item !== null);
 }

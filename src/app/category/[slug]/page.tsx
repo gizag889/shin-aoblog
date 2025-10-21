@@ -14,7 +14,7 @@ export default async function categoryPage({ params }: { params: { slug: string}
     if (!staticPost || staticPost.length === 0) {
         notFound();
     }
-    return <CategoryClient categoryId={categoryId} categoryList={staticPost}/>
+    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={1} categorySlug={params.slug}/>
 
     
 

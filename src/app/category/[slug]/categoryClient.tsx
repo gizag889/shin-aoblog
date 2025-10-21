@@ -10,14 +10,16 @@ import Pagination from "@/components/molecules/Pagination";
 export default function CategoryClient({
     categoryId,
     categoryList,
-    currentPage
+    currentPage,
+    categorySlug
 }: {
     categoryId: number,
     categoryList: PostListType[]
-    currentPage: number
+    currentPage: number,
+    categorySlug: string
 }) {
     const [posts, total] = usePostListSwr({
-        currentPage: 1,
+        currentPage: currentPage,
         categoryId,
         staticPostList: categoryList,
         staticTotal: categoryList.length
@@ -33,7 +35,7 @@ export default function CategoryClient({
                 )
                 })}
             </div>
-            <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path="" />
+            <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path={`/category/${categorySlug}/page`} />
 
         </Layout>
     )
