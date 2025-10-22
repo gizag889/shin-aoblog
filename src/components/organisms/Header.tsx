@@ -15,15 +15,21 @@ const Header = () => {
                 <div className="flex items-center px-4 min-h-[56px] sm:min-h-[74px] sm:px-6">
                     <div className="mx-auto w-full  sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-headerlg">
                         <div className="flex justify-between items-center">
-                            <h1>
-                                <img src="/aoblogtitle.svg" alt="ブログタイトル"/>
-                            </h1>
+                         
+                                <a href="/" className="focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                    <h1>
+                                        <img src="/aoblogtitle.svg" alt="ブログタイトル"/>
+                                    </h1>
+                                </a>
+                         
+                           
+                              
                           
                                 <nav>
                                     
-                                    <ul className="inline-flex gap-4  list-none m-0 p-0 py-2 relative">
+                                    <ul className=" inline-flex gap-4  list-none m-0 p-0 py-2 relative">
                                         { setNavLinks.map( (navLink) => (
-                                        <button key={navLink.text}  className="cursor-pointer inline-flex tracking-[0.1em] items-center justify-center min-w-[64px] rounded  px-4 py-2 font-bold uppercase   transition-all duration-250 ease-in-out hover:text-(--color-secondary-main) hover:bg-(--color-divider-main)">
+                                        <button key={navLink.text}  className=" cursor-pointer inline-flex tracking-[0.1em] items-center justify-center min-w-[64px] rounded  px-4 py-2 font-bold uppercase   transition-all duration-250 ease-in-out hover:text-(--color-secondary-main) hover:bg-(--color-divider-main)">
                                                 {navLink.text}
                                         </button>
 

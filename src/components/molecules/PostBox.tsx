@@ -13,7 +13,7 @@ const PostBox = ({ post }: {
     post: PostListType
 }) => {
   return ( 
-    <div className=' cursor-pointer'>       
+    <div className=' cursor-pointer  '>       
         {/* keyを削除 */}
         <div className='border-1 border-(--color-divider-main) hover:border-(--color-secondary-main) rounded-lg'>
             <div className='hover:text-(--color-secondary-main)'>

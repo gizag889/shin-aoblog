@@ -19,8 +19,6 @@ class AppliesTypes {
         res.data.data.categories.edges.forEach((data: any) => {
             const categorySlug = data.node.slug;
             const total = data.node.posts.pageInfo.offsetPagination.total;
-    
-          
             const pageList = AppliesTypes._makePageList(total); 
     
             pageList.forEach((page: number) => {

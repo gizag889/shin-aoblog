@@ -10,6 +10,7 @@ import PostConst from "@/constants/PostConst";
 import CategoryTags from "@/components/molecules/CategoryTags";
 import AppliesTypes from "@/services/PostServices";
 import { useEffect, useState } from "react";
+import CategoryLinks from "@/components/molecules/CategoryLinks";
 
  
 
@@ -29,31 +30,20 @@ export default function HomeClient({
         currentPage
     })
 
-    const [allCategories, setAllCategories] = useState<{ slug: string, name: string }[]>([])
-
-    useEffect(() => {
-        // 全投稿からカテゴリ一覧を取得（ページングに依存しない）
-        AppliesTypes.getAllCategories().then((cats) => {
-            // 念のため slug でユニーク化
-            const unique = Array.from(new Map(cats.map(c => [c.slug, c])).values())
-            setAllCategories(unique)
-        })
-    }, [])
+   
 
     return (
         <Layout>
             <div className='pt-6 mx-auto lg:max-w-screen-lg'>
                 <div className='flex gap-10 items-start'>
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-4  '>
                         {postList.map((post) => {
                             return <PostBox key={post.id} post={post} />
                         })}
                     </div>
                     <div>
                         <AboutBox></AboutBox>
-                        {allCategories.map((category) => (
-                            <CategoryTags key={category.slug} category={category} />
-                        ))}
+                       <CategoryLinks></CategoryLinks>
                     </div>
                 </div>
                 <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path="" />

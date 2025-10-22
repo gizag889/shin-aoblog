@@ -7,7 +7,7 @@ const CategoryTags = ({ category }: {
 }) => {
   return (
     <Link href={`/category/${category.slug}`}>
-          <div>{category.name}</div>
+          <div className='p-2 rounded-md border border-(--color-divider-main)'>{category.name}</div>
     </Link>
   )
 }
