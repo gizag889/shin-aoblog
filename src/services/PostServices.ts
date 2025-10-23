@@ -41,12 +41,36 @@ class AppliesTypes {
     static async getList({ categoryId, page }: { 
         categoryId?: number, page: number } ): Promise<[PostListType[], number]> {
         try {
-            const offsetPagination = this._makeOffsetPaginationFromPage(page)
-
-            const res = await RepositoryFactory.post.getList({ categoryId, offsetPagination });
+            console.log('🔍 getList デバッグ情報:');
+            console.log('📝 入力パラメータ:', { categoryId, page });
             
-            const postList = res.data.data.posts.edges.map((data: any) => {
-
+            const offsetPagination = this._makeOffsetPaginationFromPage(page)
+            console.log('📊 ページネーション情報:', offsetPagination);
+    
+            console.log('🚀 APIリクエスト開始...');
+            const res = await RepositoryFactory.post.getList({ categoryId, offsetPagination });
+            console.log('✅ APIレスポンス受信完了');
+            
+            // レスポンスの構造を確認
+            console.log('📦 レスポンス構造:', {
+                hasData: !!res.data,
+                hasPostsData: !!res.data?.data?.posts,
+                edgesLength: res.data?.data?.posts?.edges?.length || 0,
+                hasPageInfo: !!res.data?.data?.posts?.pageInfo,
+                hasOffsetPagination: !!res.data?.data?.posts?.pageInfo?.offsetPagination
+            });
+    
+            // 実際のレスポンスデータをログ出力（必要に応じてコメントアウト）
+            console.log('📄 レスポンスデータ:', JSON.stringify(res.data, null, 2));
+    
+            const postList = res.data.data.posts.edges.map((data: any, index: number) => {
+                console.log(`📝 投稿データ処理中 ${index + 1}/${res.data.data.posts.edges.length}:`, {
+                    id: data.node.id,
+                    title: data.node.title,
+                    hasFeaturedImage: !!data.node.featuredImage?.node?.sourceUrl,
+                    hasCategories: data.node.categories?.edges?.length > 0
+                });
+    
                 const post: PostListType = {
                     id: data.node.id,
                     title: data.node.title,
@@ -61,14 +85,33 @@ class AppliesTypes {
                         name: data.node.categories.edges[0].node.name
                     }
                 }
-              return post
+                return post
             })
+    
             const total = res.data.data.posts.pageInfo.offsetPagination.total
+            console.log('📊 処理結果:', {
+                totalPosts: total,
+                processedPosts: postList.length,
+                postTitles: postList.map((p: PostListType) => p.title)
+            });
+    
             return [postList, total]
-        } catch {
+        } catch (error) {
+            console.error('❌ getList エラー発生:');
+            console.error('エラー詳細:', error);
+            console.error('エラースタック:', error instanceof Error ? error.stack : 'スタック情報なし');
+            
+            // エラーがAxiosエラーの場合、レスポンス情報も出力
+            if (error && typeof error === 'object' && 'response' in error) {
+                console.error('📡 APIレスポンスエラー:', {
+                    status: (error as any).response.status,
+                    statusText: (error as any).response.statusText,
+                    data: (error as any).response.data
+                });
+            }
+            
             return [[], 0];
         }
-    
     }
 
     // すべてのカテゴリ（name/slug）を取得

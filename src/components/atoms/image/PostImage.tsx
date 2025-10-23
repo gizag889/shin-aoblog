@@ -1,12 +1,13 @@
-// component
-import Image from "next/image"
+import Image from "next/image";
 
-const CommImage = ({ src, alt }: {
+import React from 'react'
+
+const PostImage = ({ src, alt}: {
     src: string,
     alt: string,
 }) => {
-    return (
-        <div className={`relative w-full h-56  ob`}>
+  return (
+    <div className={`relative w-full h-56  ob`}>
             <Image
                 src={src}
                 alt={alt}
@@ -14,7 +15,7 @@ const CommImage = ({ src, alt }: {
                 className=" rounded-t-lg"
                  />
         </div>
-    )
+  )
 }
 
-export default CommImage
+export default PostImage
