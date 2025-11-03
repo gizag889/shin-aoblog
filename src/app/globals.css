@@ -66,6 +66,16 @@ body {
   --color-divider-main:#424242;
   --color-secondary-main:  #B3E5FC;
 }
+
+h2 {
+  
+  font-size: 36px;
+  font-weight: bold;
+
+}
+p {
+  line-height: 1.8;
+}
 /* CSSファイルまたはTailwindの@layerで */
 .pagination-link {
   @apply relative inline-flex items-center border   px-6 py-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:border-2 hover:border-indigo-500;

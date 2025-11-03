@@ -8,7 +8,8 @@ import PostContent from "@/components/layouts/PostContent";
 
 import Link from "next/link";
 import DateText from "@/components/atoms/text/DateText";
-import CategoryLinks from "@/components/molecules/CategoryLinks";
+import CategoryLinksWrapper from "@/components/molecules/CategoryLinksWrapper";
+import ModifiedText from "@/components/atoms/text/ModifiedText";
 
 export default function PostClient({
     slug,
@@ -21,8 +22,8 @@ export default function PostClient({
 
     return(
     <Layout>
-        <div className="pt-10   mx-auto">
-            <div className=" w-(--breakpoint-sm) mx-auto  vobject-contain  mb-4">
+        <div className="w-(--breakpoint-md)   pt-10 mx-auto">
+            <div className="w-full object-contain  mb-4">
                     <img
                         
                         src={post!.featuredImage.url}
@@ -30,15 +31,18 @@ export default function PostClient({
                         />
             </div>
             <div className="pt-10 flex  justify-center gap-15">
-                    <article className="w-(--breakpoint-md) border-1 border-(--color-divider-main) rounded-lg">
-                        <div className=" ">
+                    <article className="w-(--breakpoint-md) border-1 border-(--color-divider-main) rounded-lg shadow-(--shadow-lg)">
+                        <div >
                             <div className="p-4 bg-(--color-primary-main) rounded-md ">
                                 <div>
-                                    <div className="text-4xl font-bold">{post!.title}</div>
+                                    <h1 className="text-4xl font-bold">{post!.title}</h1>
                                 </div>
                                 <div className="">
-                                    <DateText>{post!.date}</DateText>
-                                    <div className="pt-2">
+                                    <div className="pt-4 flex justify-end gap-4">
+                                        <ModifiedText>{post?.modified}</ModifiedText>
+                                        <DateText>{post!.date}</DateText>
+                                    </div>
+                                    <div className="pt-2 flex align-center">
                                         <Link href={post!.category.slug}>
                                                 <div className="p-2 inline-block rounded-md border border-(--color-divider-main) bg-(--color-background-default)">
                                                     {post!.category.name}
@@ -54,7 +58,7 @@ export default function PostClient({
 
                         </div>
                     </article>
-                    <CategoryLinks></CategoryLinks>
+                    {/* <CategoryLinksWrapper></CategoryLinksWrapper> */}
 
             </div>
             

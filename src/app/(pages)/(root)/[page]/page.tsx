@@ -3,9 +3,9 @@ import PostListType from "@/types/PostListType";
 import HomeClient from "./HomeClient";
 import { notFound } from "next/navigation";
 
-export default async function HomeByPage({ params }: { params: { page: string } }) {
-  const currentPage = Number(params.page)
-  console.log('Current page:', currentPage); // デバッグ用
+export default async function HomeByPage({ params }: { params: Promise<{ page: string }> }) {
+	const { page } = await params
+	const currentPage = Number(page)
   
   if (!Number.isFinite(currentPage) || currentPage < 1) {
       notFound()

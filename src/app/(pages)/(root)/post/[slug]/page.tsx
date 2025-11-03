@@ -4,13 +4,14 @@ import { notFound } from "next/navigation";
 import PostClient from "../PostClient";
 
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
 
-    const staticPost: PostType | null = await AppliesTypes.getOne({ id: params.slug });
-    if (!staticPost) {
-        notFound();
-    }
-    return <PostClient slug={params.slug} staticPost={staticPost} />
+	const { slug } = await params;
+	const staticPost: PostType | null = await AppliesTypes.getOne({ id: slug });
+	if (!staticPost) {
+		notFound();
+	}
+	return <PostClient slug={slug} staticPost={staticPost} />
 }
 
 

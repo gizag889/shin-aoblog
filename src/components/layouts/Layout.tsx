@@ -1,5 +1,5 @@
 import Header from "../organisms/Header";
-// import Footer from "../organisms/Footer";
+import Footer from "../organisms/Footer";
 import { ReactNode } from "react";
 
 const Layout = ({ children, hidePt = false }: {
@@ -10,7 +10,7 @@ const Layout = ({ children, hidePt = false }: {
         <div> 
             <Header/>
                     <div>{children}</div>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

@@ -6,7 +6,8 @@ interface PostType {
     title: string
     slug: string
     date: string
-    content: string // ココが違う！！！
+    content: string 
+    modified: string
     featuredImage: FeaturedImageType
     category: CategoryType
 }

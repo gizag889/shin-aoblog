@@ -12,9 +12,8 @@ const usePostSwr = ({ id, staticPost }: {
     staticPost: PostType
 }) => {
     const { data: post } = useSWR(
-        [WpQueries.list, id], //　Keyを配列にもできる
-        //上記のデータをAppliesTypesでマッピングしている？
-        ([_, id]: [string, string]) => AppliesTypes.getOne({ id }), // 使うのはidだけなので第一引数はアンダースコアに
+        [`post-${id}`, id], // より適切なキー名
+        ([_, id]: [string, string]) => AppliesTypes.getOne({ id }),
         { fallbackData: staticPost }
     )
     return post

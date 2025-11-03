@@ -47,6 +47,7 @@ private static _itemsOnOne = `
     }
   }
   date
+  modified
   content
   featuredImage {
     node {
