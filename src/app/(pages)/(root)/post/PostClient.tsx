@@ -10,6 +10,7 @@ import Link from "next/link";
 import DateText from "@/components/atoms/text/DateText";
 import CategoryLinksWrapper from "@/components/molecules/CategoryLinksWrapper";
 import ModifiedText from "@/components/atoms/text/ModifiedText";
+import PostNav from "@/components/molecules/PostNav";
 
 export default function PostClient({
     slug,
@@ -19,6 +20,8 @@ export default function PostClient({
     staticPost: PostType
 }) {
     const post = usePostSwr({ id: slug, staticPost})
+
+	
 
     return(
     <Layout>
@@ -37,8 +40,8 @@ export default function PostClient({
                                 <div>
                                     <h1 className="text-4xl font-bold">{post!.title}</h1>
                                 </div>
-                                <div className="">
-                                    <div className="pt-4 flex justify-end gap-4">
+                                <div >
+                                    <div className="pt-6 flex justify-end gap-4">
                                         <ModifiedText>{post?.modified}</ModifiedText>
                                         <DateText>{post!.date}</DateText>
                                     </div>
@@ -61,9 +64,8 @@ export default function PostClient({
                     {/* <CategoryLinksWrapper></CategoryLinksWrapper> */}
 
             </div>
-            
-            
-        </div>
-    </Layout>
-    )
+			<PostNav slug={post!.slug}></PostNav>
+            </div>
+        </Layout>
+    );
 }

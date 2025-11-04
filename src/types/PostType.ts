@@ -10,6 +10,7 @@ interface PostType {
     modified: string
     featuredImage: FeaturedImageType
     category: CategoryType
+    
 }
 
 export default PostType

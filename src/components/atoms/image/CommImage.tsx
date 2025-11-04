@@ -6,7 +6,7 @@ const CommImage = ({ src, alt }: {
     alt: string,
 }) => {
     return (
-        <div className={`relative w-full h-56  ob`}>
+        <div className={`relative w-full h-45  object-cover`}>
             <Image
                 src={src}
                 alt={alt}
