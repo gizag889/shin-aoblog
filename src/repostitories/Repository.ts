@@ -2,8 +2,13 @@ import axios from "axios";
 
 
 
+const endpoint = process.env.NEXT_PUBLIC_WP_ENDPOINT;
+if (!endpoint) {
+    throw new Error("Environment variable NEXT_PUBLIC_WP_ENDPOINT is not set or empty.");
+}
+
 const repository = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_WP_ENDPOINT,
+    baseURL: endpoint,
     headers: {
         'Content-Type': 'application/json'
     }
