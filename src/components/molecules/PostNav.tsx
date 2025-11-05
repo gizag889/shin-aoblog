@@ -8,12 +8,12 @@ const PostNav = ({ slug }: { slug: string }) => {
   return (
     <div className="mt-10 flex justify-between">
         <Link href={prevSlug}>
-            <div className='py-5 px-13 inline-block rounded-md border border-(--color-divider-main) bg-(--color-primary-main)'>
+            <div className='py-5 px-13 inline-block rounded-md border border-(--color-divider-main) bg-(--color-primary-main) shadow-(--shadow-md)'>
               前の記事
             </div>
         </Link>
         <Link href={nextSlug}>
-               <div className='py-5 px-13 inline-block rounded-md border border-(--color-divider-main) bg-(--color-primary-main)'>
+               <div className='py-5 px-13 inline-block rounded-md border border-(--color-divider-main) bg-(--color-primary-main) shadow-(--shadow-md)'>
                  次の記事
               </div>
         </Link>

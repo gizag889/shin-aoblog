@@ -5,7 +5,44 @@ import PostType from "@/types/PostType";
 import OffsetPaginationType from "@/types/OffsetPaginationType";
 
 import PostConst from "@/constants/PostConst";
-import { WpQueries } from "@/constants/WpQueries";
+
+// WordPress API レスポンス型定義
+interface WpPostEdge {
+    node: {
+        id: string;
+        title: string;
+        slug: string;
+        date: string;
+        excerpt: string;
+        featuredImage: {
+            node: {
+                sourceUrl: string;
+            };
+        };
+        categories: {
+            edges: Array<{
+                node: {
+                    slug: string;
+                    name: string;
+                };
+            }>;
+        };
+    };
+}
+
+interface WpCategoryEdge {
+    node: {
+        slug: string;
+        name?: string;
+        posts?: {
+            pageInfo: {
+                offsetPagination: {
+                    total: number;
+                };
+            };
+        };
+    };
+}
 
 //postservice
 class AppliesTypes {
@@ -16,9 +53,9 @@ class AppliesTypes {
     
         const res = await RepositoryFactory.post.getAllCategorySlugList();
     
-        res.data.data.categories.edges.forEach((data: any) => {
+        res.data.data.categories.edges.forEach((data: WpCategoryEdge) => {
             const categorySlug = data.node.slug;
-            const total = data.node.posts.pageInfo.offsetPagination.total;
+            const total = data.node.posts?.pageInfo.offsetPagination.total ?? 0;
             const pageList = AppliesTypes._makePageList(total); 
     
             pageList.forEach((page: number) => {
@@ -50,7 +87,7 @@ class AppliesTypes {
            
          
     
-            const postList = res.data.data.posts.edges.map((data: any, index: number) => {
+            const postList = res.data.data.posts.edges.map((data: WpPostEdge) => {
              
     
                 const post: PostListType = {
@@ -89,9 +126,9 @@ class AppliesTypes {
     static async getAllCategories(): Promise<{ slug: string, name: string }[]> {
         try {
             const res = await RepositoryFactory.post.getAllCategories()
-            return res.data.data.categories.edges.map((edge: any) => ({
+            return res.data.data.categories.edges.map((edge: WpCategoryEdge) => ({
                 slug: edge.node.slug,
-                name: edge.node.name
+                name: edge.node.name ?? ''
             }))
         } catch {
             return []
@@ -133,7 +170,7 @@ class AppliesTypes {
     }[]> {
         try {
             const res = await RepositoryFactory.post.getAllSlugList()
-            return res.data.data.posts.edges.map((data: any) => {
+            return res.data.data.posts.edges.map((data: WpPostEdge) => {
                 return { params: { slug: data.node.slug } }
             })
         } catch {
@@ -149,7 +186,7 @@ class AppliesTypes {
     }[]> {
         try {
             const res = await RepositoryFactory.post.getAllCategorySlugList()
-            return res.data.data.categories.edges.map((data: any) => {
+            return res.data.data.categories.edges.map((data: WpCategoryEdge) => {
                 return { params: { slug: data.node.slug } }
             })
         } catch {
