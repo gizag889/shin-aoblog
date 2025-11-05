@@ -8,7 +8,6 @@ import PostContent from "@/components/layouts/PostContent";
 
 import Link from "next/link";
 import DateText from "@/components/atoms/text/DateText";
-import CategoryLinksWrapper from "@/components/molecules/CategoryLinksWrapper";
 import ModifiedText from "@/components/atoms/text/ModifiedText";
 import PostNav from "@/components/molecules/PostNav";
 

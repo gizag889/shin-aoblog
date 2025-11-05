@@ -7,9 +7,7 @@ import PostBox from "@/components/molecules/PostBox";
 import AboutBox from "@/components/molecules/AboutBox";
 import Pagination from "@/components/molecules/Pagination";
 import PostConst from "@/constants/PostConst";
-import CategoryTags from "@/components/molecules/CategoryTags";
-import AppliesTypes from "@/services/PostServices";
-import { useEffect, useState } from "react";
+
 import CategoryLinks from "@/components/molecules/CategoryLinks";
 
  

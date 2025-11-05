@@ -1,4 +1,3 @@
-import PostListType from "@/types/PostListType";
 import AppliesTypes from "@/services/PostServices";
 import CategoryClient from "./categoryClient";
 import { notFound } from "next/navigation";

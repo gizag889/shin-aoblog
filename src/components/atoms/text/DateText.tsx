@@ -24,7 +24,7 @@ const DateText = ({ children }: {
                     公開日：{formattedDate}
                 </time>
             );
-        } catch (error) {
+        } catch  {
             // パースに失敗した場合は元の文字列を返す
             const fallbackDate = dateString.split('T')[0];
             return <time dateTime={fallbackDate}>{fallbackDate}</time>;
