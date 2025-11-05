@@ -17,7 +17,7 @@ const Header = () => {
                     <div className="mx-auto w-full  sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-headerlg">
                         <div className="flex justify-between items-center">
                          
-                                <Link href="#" className="focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                     <h1>
                                         <img src="/aoblogtitle.svg" alt="ブログタイトル"/>
                                     </h1>
