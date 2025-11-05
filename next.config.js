@@ -16,9 +16,7 @@ const nextConfig = {
     ]
   },
 
-  experimental: {
-    optimizeCss: false // lightningcssを使用しない
-  }
+  
 
 };
 
