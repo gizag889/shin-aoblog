@@ -14,7 +14,7 @@ const notoSansJP = Noto_Sans_JP({
 });
  
 export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.SITE_URL),
+  // metadataBase: new URL(siteMetadata.SITE_URL),
   title: {
     default: siteMetadata.SITE_NAME,
     template: `%s | ${siteMetadata.SITE_NAME}`,

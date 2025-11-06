@@ -1,7 +1,6 @@
 import  useSWR  from 'swr';// const
 
 
-import { WpQueries } from "@/constants/WpQueries"
 // type
 import PostType from "../../types/PostType"
 // service
