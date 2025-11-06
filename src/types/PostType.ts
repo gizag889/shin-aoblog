@@ -1,5 +1,5 @@
 import FeaturedImageType from "./FeaturedImageType"
-import { CategoryType } from "./CategoryType"
+import CategoryType  from "./CategoryType"
 
 interface PostType {
     id: string
