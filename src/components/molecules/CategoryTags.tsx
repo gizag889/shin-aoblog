@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import CategoryType from '@/types/CategoryType'
+import  CategoryType  from '@/types/CategoryType'
+
 
 
 const CategoryTags = ({ category }: {

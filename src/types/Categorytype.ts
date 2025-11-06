@@ -4,3 +4,4 @@ interface CategoryType {
 }
 
 export default CategoryType
+
