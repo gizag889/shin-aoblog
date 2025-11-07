@@ -1,11 +1,11 @@
 import React from 'react'
-// type
-import PostListType from '@/types/PostListType'
+// 
+import PostListType from '../../types/PostListType'
 import CommImage from '../atoms/image/CommImage'
 import Link from 'next/link'
 //component
-import DateText from '../atoms/text/DateText'
-import PosTitle from '../atoms/text/PosTitle'
+import DateText from '../../components/atoms/text/DateText'
+import PosTitle from '../../components/atoms/text/PosTitle'
 
 
 
