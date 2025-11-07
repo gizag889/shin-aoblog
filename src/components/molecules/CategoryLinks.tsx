@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoryTags from './CategoryTags'
+// import CategoryTags from './CategoryTags'
 
 import AppliesTypes from '@/services/PostServices'
 
@@ -16,9 +16,9 @@ const CategoryLinks = async () => {
                     <div className='text-center py-2'>カテゴリー</div>
                 </div>
                 <div className='flex flex-wrap gap-4 p-5 bg-(--color-background-default) border-1 border-(--color-divider-main) rounded-b-2xl'>
-                    {uniqueCategories.map((category) => (
+                    {/* {uniqueCategories.map((category) => (
                         <CategoryTags key={category.slug} category={category} />
-                    ))}
+                    ))} */}
                 </div>
             </div>
         </div>
