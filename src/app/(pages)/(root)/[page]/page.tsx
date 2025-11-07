@@ -12,6 +12,7 @@ export default async function HomeByPage({ params }: { params: Promise<{ page: s
   }
   
   const [staticPostList, staticTotal]: [PostListType[], number] = await AppliesTypes.getList({ page: currentPage });
+  const allCategories = await AppliesTypes.getAllCategories();
   
   console.log('Post list length:', staticPostList?.length); // デバッグ用
   console.log('Total:', staticTotal); // デバッグ用
@@ -20,7 +21,7 @@ export default async function HomeByPage({ params }: { params: Promise<{ page: s
   //     notFound()
   // }
 
-  return <HomeClient staticPostList={staticPostList} staticTotal={staticTotal} currentPage={currentPage} />
+  return <HomeClient staticPostList={staticPostList} staticTotal={staticTotal} currentPage={currentPage} categories={allCategories} />
 }
 
 export const revalidate = 10

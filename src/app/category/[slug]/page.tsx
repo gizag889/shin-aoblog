@@ -3,9 +3,10 @@ import CategoryClient from "./categoryClient";
 import { notFound } from "next/navigation";
 
 
-export default async function categoryPage({ params }: { params: { slug: string}}){
+export default async function categoryPage({ params }: { params: Promise<{ slug: string}>}){
 
-    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug:params.slug });
+    const { slug } = await params;
+    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug });
     if (!categoryId) {
         notFound();
     }
@@ -13,7 +14,7 @@ export default async function categoryPage({ params }: { params: { slug: string}
     if (!staticPost || staticPost.length === 0) {
         notFound();
     }
-    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={1} categorySlug={params.slug}/>
+    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={1} categorySlug={slug}/>
 
     
 

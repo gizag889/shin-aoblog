@@ -3,20 +3,21 @@ import { notFound } from "next/navigation";
 import CategoryClient from "../../categoryClient";
 
 
-export default async function categoryPage({ params }: { params: { slug: string, page: string}}){
+export default async function categoryPage({ params }: { params: Promise<{ slug: string, page: string}>}){
 
-    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug: params.slug });
+    const { slug, page: pageStr } = await params;
+    const categoryId = await AppliesTypes.getCategoryIdBySlug({ slug });
     if (!categoryId) {
         notFound();
     }
     
-    const page = parseInt(params.page);
+    const page = parseInt(pageStr);
     const [staticPost] = await AppliesTypes.getList({ categoryId, page });
     if (!staticPost || staticPost.length === 0) {
         notFound();
     }
 
-    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={page} categorySlug={params.slug} />
+    return <CategoryClient categoryId={categoryId} categoryList={staticPost} currentPage={page} categorySlug={slug} />
 }
 
 export const revalidate = 10

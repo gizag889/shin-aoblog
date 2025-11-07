@@ -1,6 +1,7 @@
 'use client'
 import usePostListSwr from "@/hooks/swr/usePostListSwr";
 import PostListType from "@/types/PostListType";
+import CategoryType from "@/types/CategoryType";
 //component
 import Layout from "@/components/layouts/Layout";
 import PostBox from "@/components/molecules/PostBox";
@@ -15,11 +16,13 @@ import CategoryLinks from "@/components/molecules/CategoryLinks";
 export default function HomeClient({
     staticPostList,
     staticTotal,
-    currentPage
+    currentPage,
+    categories
 }: {
     staticPostList: PostListType[],
     staticTotal: number,
-    currentPage: number
+    currentPage: number,
+    categories: CategoryType[]
 
 }) {
     const [postList, total] = usePostListSwr({
@@ -41,7 +44,7 @@ export default function HomeClient({
                     </div>
                     <div>
                         <AboutBox></AboutBox>
-                       <CategoryLinks></CategoryLinks>
+                       <CategoryLinks categories={categories}></CategoryLinks>
                     </div>
                 </div>
                 <Pagination total={total} sizePerPage={PostConst.sizePerPage} currentPage={currentPage} path="" />
