@@ -5,7 +5,10 @@ const nextConfig = {
   
  
   images: {
-    domains: process.env.ALLOWED_IMAGE_HOST.split(',') // 文字列を配列に変える（区切りは「,」）
+    domains: [
+      'localhost',
+      ...(process.env.ALLOWED_IMAGE_HOST ? process.env.ALLOWED_IMAGE_HOST.split(',') : [])
+    ]
   },
   async rewrites() {
     return [

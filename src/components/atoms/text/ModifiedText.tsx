@@ -19,7 +19,7 @@ const ModifiedText = ({ children }: {
             
             return (
                 <time dateTime={isoDate}>
-                    更新日：{formattedDate}
+                    更新{formattedDate}
                 </time>
             );
         } catch (error) {

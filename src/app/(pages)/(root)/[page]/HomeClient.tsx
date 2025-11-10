@@ -35,9 +35,9 @@ export default function HomeClient({
 
     return (
         <Layout>
-            <div className='pt-6 mx-auto lg:max-w-screen-lg'>
-                <div className='flex gap-10 items-start'>
-                    <div className='grid grid-cols-2 gap-4  '>
+            <div className='pt-10 mx-auto lg:max-w-screen-lg'>
+                <div className='flex gap-10 justify-center'>
+                    <div className='grid grid-cols-2 gap-4  w-170'>
                         {postList.map((post) => {
                             return <PostBox key={post.id} post={post} />
                         })}

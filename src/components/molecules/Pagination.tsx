@@ -9,13 +9,13 @@ const Pagination = ({ total, sizePerPage, currentPage, path }: {
 }) => {
     const totalPage = Math.ceil(total/sizePerPage)
     return (
-        <div className="flex items-center justify-between   px-4 py-8 sm:px-6">
+        <div className="mt-8 flex items-center justify-between   px-4 py-8 sm:px-6">
           <div className="flex sm:flex-1 sm:items-center sm:justify-center">
             <div>
-              <nav className="cursor-pointer  relative z-0 inline-flex -space-x-px rounded-md shadow-sm " aria-label="Pagination">
+              <nav className=" cursor-pointer  relative z-0 inline-flex -space-x-px rounded-md shadow-sm " aria-label="Pagination">
               <a
                 href={`${path}/1`}
-                className="pagination-link rounded-l-md"
+                className=" pagination-link rounded-l-md"
               >
                   <span className="sr-only">Previous</span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">

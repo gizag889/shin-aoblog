@@ -27,6 +27,7 @@ export class WpQueries { // 今後増える可能性を考えてこの命名に
     }
   }
   date
+  modified
   excerpt
   featuredImage {
     node {

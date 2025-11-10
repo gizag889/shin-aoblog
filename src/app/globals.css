@@ -19,7 +19,7 @@
   --color-text-primary: #E8E6E3; /* #E8E6E3 in RGB */
 
   /* プライマリカラーパレット */
-  --color-primary-main: #121212;     /* #212121 */
+  --color-primary-main: #212121;     /* #212121 */
   --color-primary-dark: 255 196 0;    /* #FFC400 */
 
   /* セカンダリカラーパレット */
@@ -29,7 +29,7 @@
   /*divider-color*/
 
   /* 背景色 */
-  --color-background-default: #212121; /* #212121 */
+  --color-background-default: #121212; /* #212121 */
 
   /* エラーカラー */
   --color-error-main:#EF9A9A ;    /* #EF9A9A */
@@ -76,11 +76,13 @@ p {
 }
 /* CSSファイルまたはTailwindの@layerで */
 .pagination-link {
-  @apply relative inline-flex items-center border   px-6 py-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:border-2 hover:border-indigo-500;
+  @apply border-1 border-(--color-divider-main) relative inline-flex items-center 
+    px-6 py-3 text-base font-medium text-gray-500 hover:bg-(--color-primary-main) hover:border-r-2
+     hover:border-(--color-secondary-main) hover:text-(--color-text-primary)  ; 
 }
 
 .pagination-link.active {
-  @apply text-[#121212]  relative z-10 bg-indigo-50;
+  @apply text-(--color-text-primary)  relative  bg-[#212121]  ;
 }
 
 @theme inline {

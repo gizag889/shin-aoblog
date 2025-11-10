@@ -13,6 +13,7 @@ interface WpPostEdge {
         title: string;
         slug: string;
         date: string;
+        modified: string;
         excerpt: string;
         featuredImage: {
             node: {
@@ -95,6 +96,7 @@ class AppliesTypes {
                     title: data.node.title,
                     slug: data.node.slug,
                     date: data.node.date,
+                    modified: data.node.modified,
                     excerpt: data.node.excerpt,
                     featuredImage: {
                         url: data.node.featuredImage.node.sourceUrl

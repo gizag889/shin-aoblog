@@ -32,8 +32,8 @@ export default function PostClient({
                         alt="投稿のサムネイル"
                         />
             </div>
-            <div className="pt-10 flex  justify-center gap-15">
-                    <article className="w-(--breakpoint-md) border-1 border-(--color-divider-main) rounded-lg shadow-(--shadow-lg)">
+            <div className="pt-10 flex justify-center gap-15">
+                    <article className="max-w-[var(--breakpoint-md)] border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
                         <div >
                             <div className="p-4 bg-(--color-primary-main) rounded-md ">
                                 <div>
@@ -45,7 +45,7 @@ export default function PostClient({
                                         <DateText>{post!.date}</DateText>
                                     </div>
                                     <div className="pt-2 flex align-center">
-                                        <Link href={post!.category.slug}>
+                                        <Link href={`/category/${post!.category.slug}`}>
                                                 <div className="p-2 inline-block rounded-md border border-(--color-divider-main) bg-(--color-background-default)">
                                                     {post!.category.name}
                                                 </div>

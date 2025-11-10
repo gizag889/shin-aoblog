@@ -21,7 +21,7 @@ const DateText = ({ children }: {
             
             return (
                 <time dateTime={isoDate}>
-                    公開日：{formattedDate}
+                    公開{formattedDate}
                 </time>
             );
         } catch  {
