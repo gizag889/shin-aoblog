@@ -89,8 +89,6 @@ class AppliesTypes {
          
     
             const postList = res.data.data.posts.edges.map((data: WpPostEdge) => {
-             
-    
                 const post: PostListType = {
                     id: data.node.id,
                     title: data.node.title,
