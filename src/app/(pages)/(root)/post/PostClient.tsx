@@ -33,13 +33,13 @@ export default function PostClient({
         
     <Layout>
         <div className="w-(--breakpoint-md)   pt-10 mx-auto">
-            <div className="w-full object-contain  mb-4">
+            {/* <div className="w-full object-contain  mb-4">
                     <img
                         
                         src={post!.featuredImage.url}
                         alt="投稿のサムネイル"
                         />
-            </div>
+            </div> */}
             <div className=" pt-10 flex justify-center gap-15">
                     <article className="bg-(--color-primary-main) max-w-[var(--breakpoint-md)] border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
                         <div >
@@ -62,7 +62,7 @@ export default function PostClient({
                                 </div>
                             </div>
                             <PostContent>
-                                <div className=" p-6 indent-4 text-balance break-all" dangerouslySetInnerHTML={{__html: post!.content}}></div>
+                                <div className=" p-6  text-balance break-all" dangerouslySetInnerHTML={{__html: post!.content}}></div>
 
                             </PostContent>
 
