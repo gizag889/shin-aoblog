@@ -7,10 +7,13 @@ import Layout from "@/components/layouts/Layout";
 import PostContent from "@/components/layouts/PostContent";
 
 import Link from "next/link";
-import Script from "next/script";
 import DateText from "@/components/atoms/text/DateText";
 import ModifiedText from "@/components/atoms/text/ModifiedText";
 import PostNav from "@/components/molecules/PostNav";
+
+import { useEffect } from "react";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 
 
 export default function PostClient({
@@ -26,7 +29,7 @@ export default function PostClient({
     return(
         
     <Layout>
-        <MyComponent />
+        <CodeHighlight />
         <div className="w-(--breakpoint-md)   pt-10 mx-auto">
             <div className="w-full object-contain  mb-4">
                     <img
@@ -72,17 +75,10 @@ export default function PostClient({
     );
 }
 
-function MyComponent() {
-    return (
-        <>
-            <Script
-                src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js" // 👈 CDNのURL
-                strategy="afterInteractive" // 👈 読み込み戦略を選択
-                onLoad={() => {
-                    console.log("ライブラリがロードされました");
-                    // ここでライブラリの初期化コードを実行
-                }}
-            />
-        </>
-    );
+function CodeHighlight() {
+    useEffect(() => {
+        hljs.highlightAll();
+    }, []);
+
+    return null;
 }
