@@ -12,7 +12,7 @@ const setNavLinks: Array<{ text: string, url: string}> = [
 const Header = () => {
     return (
        <>
-            <header className=" flex flex-col  top-0 left-0 right-0 z-50  shadow-sm">
+            <header className="flex flex-col top-0 left-0 right-0 z-50  shadow-sm">
                 <div className="flex items-center px-4 min-h-[56px] sm:min-h-[74px] sm:px-6">
                     <div className="mx-auto w-full  sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-headerlg">
                         <div className="flex justify-between items-center">

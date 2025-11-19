@@ -7,9 +7,11 @@ import Layout from "@/components/layouts/Layout";
 import PostContent from "@/components/layouts/PostContent";
 
 import Link from "next/link";
+import Script from "next/script";
 import DateText from "@/components/atoms/text/DateText";
 import ModifiedText from "@/components/atoms/text/ModifiedText";
 import PostNav from "@/components/molecules/PostNav";
+
 
 export default function PostClient({
     slug,
@@ -19,11 +21,12 @@ export default function PostClient({
     staticPost: PostType
 }) {
     const post = usePostSwr({ id: slug, staticPost})
-
 	
 
     return(
+        
     <Layout>
+        <MyComponent />
         <div className="w-(--breakpoint-md)   pt-10 mx-auto">
             <div className="w-full object-contain  mb-4">
                     <img
@@ -32,10 +35,10 @@ export default function PostClient({
                         alt="投稿のサムネイル"
                         />
             </div>
-            <div className="pt-10 flex justify-center gap-15">
-                    <article className="max-w-[var(--breakpoint-md)] border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
+            <div className=" pt-10 flex justify-center gap-15">
+                    <article className="bg-(--color-primary-main) max-w-[var(--breakpoint-md)] border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
                         <div >
-                            <div className="p-4 bg-(--color-primary-main) rounded-md ">
+                            <div className="p-4  rounded-md ">
                                 <div>
                                     <h1 className="text-4xl font-bold">{post!.title}</h1>
                                 </div>
@@ -54,7 +57,7 @@ export default function PostClient({
                                 </div>
                             </div>
                             <PostContent>
-                                <div className="p-6 indent-4 text-pretty wrap-anywhere" dangerouslySetInnerHTML={{__html: post!.content}}></div>
+                                <div className=" p-6 indent-4 text-pretty wrap-anywhere" dangerouslySetInnerHTML={{__html: post!.content}}></div>
 
                             </PostContent>
 
@@ -66,5 +69,20 @@ export default function PostClient({
 			<PostNav slug={post!.slug}></PostNav>
             </div>
         </Layout>
+    );
+}
+
+function MyComponent() {
+    return (
+        <>
+            <Script
+                src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js" // 👈 CDNのURL
+                strategy="afterInteractive" // 👈 読み込み戦略を選択
+                onLoad={() => {
+                    console.log("ライブラリがロードされました");
+                    // ここでライブラリの初期化コードを実行
+                }}
+            />
+        </>
     );
 }

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { siteMetadata } from "@/constants/site-metadata";
+
+
+
+
  
 const notoSansJP = Noto_Sans_JP({
   // Google FontsのURLで指定していたウェイトを配列で指定
