@@ -24,12 +24,14 @@ export default function PostClient({
     staticPost: PostType
 }) {
     const post = usePostSwr({ id: slug, staticPost})
-	
+    useEffect(() => {
+        hljs.highlightAll();
+    }, [post?.content]);
+
 
     return(
         
     <Layout>
-        <CodeHighlight />
         <div className="w-(--breakpoint-md)   pt-10 mx-auto">
             <div className="w-full object-contain  mb-4">
                     <img
@@ -60,7 +62,7 @@ export default function PostClient({
                                 </div>
                             </div>
                             <PostContent>
-                                <div className=" p-6 indent-4 text-pretty wrap-anywhere" dangerouslySetInnerHTML={{__html: post!.content}}></div>
+                                <div className=" p-6 indent-4 text-balance break-all" dangerouslySetInnerHTML={{__html: post!.content}}></div>
 
                             </PostContent>
 
@@ -76,9 +78,5 @@ export default function PostClient({
 }
 
 function CodeHighlight() {
-    useEffect(() => {
-        hljs.highlightAll();
-    }, []);
-
-    return null;
+  
 }
