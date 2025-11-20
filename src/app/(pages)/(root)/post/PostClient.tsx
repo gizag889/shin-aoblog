@@ -77,6 +77,3 @@ export default function PostClient({
     );
 }
 
-function CodeHighlight() {
-  
-}
