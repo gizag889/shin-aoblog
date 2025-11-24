@@ -10,6 +10,7 @@ import Link from "next/link";
 import DateText from "@/components/atoms/text/DateText";
 import ModifiedText from "@/components/atoms/text/ModifiedText";
 import PostNav from "@/components/molecules/PostNav";
+import ReactionGroup from "@/components/molecules/Reaction-group";
 
 import { useEffect } from "react";
 import hljs from "highlight.js";
@@ -32,7 +33,7 @@ export default function PostClient({
     return(
         
     <Layout>
-        <div className="w-(--breakpoint-md)   pt-10 mx-auto">
+        <div className="pt-10 mx-auto max-w-[var(--breakpoint-md)]">
             {/* <div className="w-full object-contain  mb-4">
                     <img
                         
@@ -40,8 +41,8 @@ export default function PostClient({
                         alt="投稿のサムネイル"
                         />
             </div> */}
-            <div className=" pt-10 flex justify-center gap-15">
-                    <article className="bg-(--color-primary-main) max-w-[var(--breakpoint-md)] border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
+            <div className=" pt-10 flex justify-center gap-15 w-full">
+                    <article className="w-full bg-(--color-primary-main) border border-[var(--color-divider-main)] rounded-lg shadow-[var(--shadow-lg)]">
                         <div >
                             <div className="p-4  rounded-md ">
                                 <div>
@@ -68,9 +69,9 @@ export default function PostClient({
 
                         </div>
                     </article>
-                    {/* <CategoryLinksWrapper></CategoryLinksWrapper> */}
 
             </div>
+            <ReactionGroup contentId={post!.slug}/>
 			<PostNav slug={post!.slug}></PostNav>
             </div>
         </Layout>

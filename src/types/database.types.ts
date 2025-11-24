@@ -41,25 +41,28 @@ export type Database = {
     Tables: {
       reactions: {
         Row: {
-          content_id: number
+          content_id: string
           created_at: string | null
           id: string
           reaction_type: Database["public"]["Enums"]["reaction_type"]
           user_token: string
+          comment: string | null
         }
         Insert: {
-          content_id: number
+          content_id: string
           created_at?: string | null
           id?: string
           reaction_type: Database["public"]["Enums"]["reaction_type"]
           user_token: string
+          comment?: string | null
         }
         Update: {
-          content_id?: number
+          content_id?: string
           created_at?: string | null
           id?: string
           reaction_type?: Database["public"]["Enums"]["reaction_type"]
           user_token?: string
+          comment?: string | null
         }
         Relationships: []
       }
@@ -71,7 +74,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      reaction_type: "heart" | "memo"
+      reaction_type: "like" | "interest" | "heart" | "check" | "memo"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -202,7 +205,7 @@ export const Constants = {
   },
   public: {
     Enums: {
-      reaction_type: ["heart", "memo"],
+      reaction_type: ["like", "interest", "heart", "check", "memo"],
     },
   },
 } as const
