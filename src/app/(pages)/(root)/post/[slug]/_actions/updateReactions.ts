@@ -18,6 +18,7 @@ type prevState = {
  
 export const updateReaction = async (
   prevState: prevState,
+  //contentIdとreactionTypeを引数に
   reactiondata: ReactionData
 ) => {
   let userToken = await getUserToken();

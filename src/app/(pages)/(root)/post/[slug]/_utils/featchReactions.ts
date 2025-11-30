@@ -22,6 +22,7 @@ const fetchReactions = async (
       comment: "",
     };
   }
+
   const { data } = await supabase
     .from("reactions")
     .select()
@@ -31,8 +32,11 @@ const fetchReactions = async (
     .single();
  
   return {
+    //リアクション数
     reactionCount: count || 0,
+    //リアクションをしたかどうか
     hasReacted: !!data,
+    //コメントがあるか
     comment: data?.comment || "",
   };
 };

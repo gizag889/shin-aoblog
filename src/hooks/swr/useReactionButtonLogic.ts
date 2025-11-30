@@ -30,6 +30,7 @@ const useReactionButtonLogic = (
           hasReacted: !currentState.hasReacted,
         };
       });
+      //updateReactionを呼び出す
       reactionsAction({
         contentId: contentId,
         reactionType: reactionType,
