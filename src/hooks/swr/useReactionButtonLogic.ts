@@ -25,6 +25,7 @@ const useReactionButtonLogic = (
       updateOptimistic((currentState) => {
         return {
           reactionCount: currentState.hasReacted
+            //updateOptimisticのための増減ロジック
             ? currentState.reactionCount - 1
             : currentState.reactionCount + 1,
           hasReacted: !currentState.hasReacted,

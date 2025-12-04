@@ -49,7 +49,7 @@ export const updateReaction = async (
     }
  
     return {
-      reactionCount: prevState.reactionCount, // memoはカウントしない、あるいは常に1? 仕様確認が必要だが一旦そのまま
+      reactionCount: prevState.reactionCount, 
       hasReacted: true,
       comment: reactiondata.comment,
     };

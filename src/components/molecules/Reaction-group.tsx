@@ -62,6 +62,7 @@ const ReactionGroup = ({ contentId }: { contentId: string }) => {
     <div className="mt-6 space-x-2 text-muted-foreground">
       {REACTION_TYPES.map((reactionType) => {
         const state = reactionStates[reactionType];
+        
         if (!state) return null;
 
         if (reactionType === "memo") {

@@ -31,8 +31,8 @@ const ReactionButton = (props: ReactionButtonProps) => {
   return (
     <Button
       variant={"ghost"}
-      size={"sm"}
-      className="py-0.5 h-6.5"
+      size={"lg"}
+      className="py-0.5 h-10.5"
       asChild
       // 追加
       onClick={handleClick}
@@ -42,8 +42,8 @@ const ReactionButton = (props: ReactionButtonProps) => {
         variant={"outline"}
         // 自分がリアクションしているかどうかで、スタイルを分岐
         className={cn(
-          "rounded-full text-sm text-muted-foreground hover:bg-emerald-100/80",
-          optimisticState.hasReacted && "bg-emerald-50 border-emerald-500"
+          "rounded-full cursor-pointer text-xl border-1 border-(--color-divider-main) text-muted-foreground hover:bg-(--color-secondary-main)",
+          optimisticState.hasReacted && "hover:bg-(--color-secondary-main) cursor-pointer"
         )}
       >
         {REACTION_ICONS[props.reactionType]} {optimisticState.reactionCount}

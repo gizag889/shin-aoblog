@@ -30,18 +30,19 @@ const ReactionMemo = ({ contentId, initialComment }: ReactionMemoProps) => {
   };
 
   return (
-    <form action={handleSubmit} className="flex flex-col gap-2 w-full max-w-md mt-6">
+    <form action={handleSubmit} className="flex flex-col gap-2 w-full  mt-6">
       <textarea
         name="comment"
         className="w-full p-2 border rounded-md text-sm min-h-[80px] bg-background text-foreground"
-        placeholder="ひとことメモを残す..."
+        placeholder="コメントする..."
         defaultValue={state.comment || initialComment}
       />
       <div className="flex justify-end">
         <Button
+          className="hover:bg-(--color-secondary-main)"
           type="submit"
           disabled={isPending}
-          size="sm"
+          size="lg"
           variant="outline"
         >
           {isPending ? "保存中..." : "保存"}
